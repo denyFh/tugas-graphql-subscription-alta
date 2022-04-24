@@ -1,0 +1,76 @@
+{
+    query studentWithTrueStatus {
+        keterangan_aggregate(where: {
+            status: {
+                _eq: true
+            }
+        }) {
+            nodes {
+                ketAnggota {
+                    nama
+                    id
+                }
+                id
+                id_anggota
+                nilai
+                pelajaran
+                status
+            }
+        }
+    }
+
+    mutation insertDataAngga1 {
+        insert_keterangan(objects: {
+            id_anggota: 3,
+            nilai: "90",
+            pelajaran: "Sistem informasi",
+            status: true,
+            id: 5
+        }) {
+            affected_rows
+            returning {
+                id
+                id_anggota
+                nilai
+                pelajaran
+                status
+            }
+        }
+    }
+
+    mutation insertDataAngga2 {
+        insert_keterangan(objects: {
+            id_anggota: 3,
+            nilai: "55",
+            pelajaran: "React",
+            status: false,
+            id: 6
+        }) {
+            affected_rows
+            returning {
+                id
+                id_anggota
+                nilai
+                pelajaran
+                status
+            }
+        }
+    }
+
+    mutation updateDataFalseToTrue {
+        update_keterangan(where: {
+            status: {
+                _eq: false
+            }
+        }, _set: {
+            status: true
+        }) {
+            affected_rows
+            returning {
+                status
+                id
+                id_anggota
+            }
+        }
+    }
+}
